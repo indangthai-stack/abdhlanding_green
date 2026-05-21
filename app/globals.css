@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Brand palette — light, B2B-friendly                                 */
+/*                                                                     */
+/* Inspired by the Refined LP (cream + warm orange) tuned to fit the   */
+/* ÁO BÓNG ĐÁ HUẾ logo (orange/red gradient). Restraint over neon.     */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* Surfaces */
+  --bg:           255 251 245;   /* cream */
+  --bg-soft:      252 246 234;   /* deeper cream */
+  --bg-card:      255 255 255;
+  --bg-elevated:  255 255 255;
+  --line:         235 224 205;   /* warm sand */
+  --line-strong:  208 192 168;
+
+  /* Foreground */
+  --fg:            28  31  37;   /* near-black slate */
+  --fg-muted:      82  91 107;
+  --fg-faint:     133 144 161;
+  --fg-inverse:   255 251 245;
+
+  /* Brand */
+  --brand:        220  78  37;   /* warm orange-red, matches logo */
+  --brand-hover:  192  64  28;
+  --brand-soft:   254 235 220;
+  --brand-ink:    102  35  16;
+
+  /* Secondary accent (CTA contrast) */
+  --accent:        13  74  92;   /* deep teal */
+  --accent-hover:  10  56  72;
+  --accent-soft:  220 240 245;
+
+  /* States */
+  --success:       21 128  61;
+  --success-soft: 220 252 231;
+  --warning:      180  83   9;
+  --warning-soft: 254 240 191;
+  --danger:       185  28  28;
+  --danger-soft:  254 226 226;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius:   12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgb(28 31 37 / 0.05);
+  --shadow:    0 4px 12px rgb(28 31 37 / 0.06), 0 2px 4px rgb(28 31 37 / 0.04);
+  --shadow-lg: 0 16px 40px rgb(28 31 37 / 0.08), 0 6px 12px rgb(28 31 37 / 0.04);
+}
+
+/* Map our CSS vars into Tailwind v4's @theme so utilities like
+   `bg-brand`, `text-fg-muted` etc work directly.                       */
+@theme inline {
+  --color-bg:           rgb(var(--bg));
+  --color-bg-soft:      rgb(var(--bg-soft));
+  --color-bg-card:      rgb(var(--bg-card));
+  --color-bg-elevated:  rgb(var(--bg-elevated));
+  --color-line:         rgb(var(--line));
+  --color-line-strong:  rgb(var(--line-strong));
+
+  --color-fg:           rgb(var(--fg));
+  --color-fg-muted:     rgb(var(--fg-muted));
+  --color-fg-faint:     rgb(var(--fg-faint));
+  --color-fg-inverse:   rgb(var(--fg-inverse));
+
+  --color-brand:        rgb(var(--brand));
+  --color-brand-hover:  rgb(var(--brand-hover));
+  --color-brand-soft:   rgb(var(--brand-soft));
+  --color-brand-ink:    rgb(var(--brand-ink));
+
+  --color-accent:       rgb(var(--accent));
+  --color-accent-hover: rgb(var(--accent-hover));
+  --color-accent-soft:  rgb(var(--accent-soft));
+
+  --color-success:      rgb(var(--success));
+  --color-success-soft: rgb(var(--success-soft));
+  --color-warning:      rgb(var(--warning));
+  --color-warning-soft: rgb(var(--warning-soft));
+  --color-danger:       rgb(var(--danger));
+  --color-danger-soft:  rgb(var(--danger-soft));
+
+  --font-sans:    var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-display: var(--font-display), "Inter", system-ui, sans-serif;
+
+  --radius-card: var(--radius);
+  --radius-card-lg: var(--radius-lg);
+}
+
+html, body { background: rgb(var(--bg)); color: rgb(var(--fg)); }
+body {
+  font-family: var(--font-inter), "Inter", system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle textured background for hero / promo strip */
+.bg-grid-cream {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(var(--line-strong) / 0.35) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Pulse used on "scarcity" badges */
+@keyframes brand-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgb(var(--brand) / 0.45); }
+  50%      { box-shadow: 0 0 0 8px rgb(var(--brand) / 0);    }
+}
+.animate-brand-pulse { animation: brand-pulse 2.4s ease-in-out infinite; }
+
+/* Focus ring used across the app */
+.ring-focus { outline: 2px solid rgb(var(--brand)); outline-offset: 2px; }
+
+/* Lock body scroll when a modal is open */
+.no-scroll { overflow: hidden; }
